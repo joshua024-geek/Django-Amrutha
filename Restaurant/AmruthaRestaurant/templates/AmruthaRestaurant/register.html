@@ -1,0 +1,32 @@
+{% extends 'AmruthaRestaurant/base.html' %}
+{% load static %}
+{% block title %} About Amrutha Restaurant {% endblock %}
+
+{% block content %}
+<h3 style="text-align:center">Sign Up</h3>
+ {% if form.non_field_errors %}
+        <ul class="errorlist">
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.fullname.label_tag }}<br>
+    {{ form.fullname }}<br>
+
+    {{ form.email.label_tag }}<br>
+    {{ form.email }}<br>
+
+    {{ form.password.label_tag }}<br>
+    {{ form.password }}<br>
+
+    {{ form.copassword.label_tag }}<br>
+    {{ form.copassword }}<br>
+
+    <input type="submit" value="Sign Up">
+    <p id="to-signin">Already have an account? <a href="{% url 'signin' %}">Sign In</a></p>
+</form>
+
+{% endblock %}

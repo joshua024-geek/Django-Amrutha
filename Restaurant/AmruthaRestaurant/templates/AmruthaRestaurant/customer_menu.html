@@ -1,0 +1,155 @@
+{% extends 'AmruthaRestaurant/customer_base.html' %}
+{% load static %}
+
+{% block title %}Customer Menu{% endblock %}
+
+{% block content %}
+<div class="menu">
+        <div class="menu1">
+            <div>
+                <h1>Food Menu</h1>
+            </div>
+            <div class="fav-head">
+                <!-- Add your all food items  -->
+                <div class="fav-food">
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/97e1f11db7d76bcacd76f11b41daba36.jpg' %}" alt="Food item">
+                        </div>
+                        <h3>Vijayawada Punugulu</h3>
+                        <p>Deep fried snacks made from fermented and spiced batter with green chilies, cumin seeds and ginger to impart a bunch of flavors </p>
+                        <p class="fav-price">$6.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/mirchi-bajji-mirapakaya-bajji-recipe.jpg' %}" alt="Food item">
+                        </div>
+                        <h3>Mirapakaya Bajji</h3>
+                        <p>Green chilies fried with chickpea flour batter and stuffed with Onion, lemon and cilantro</p>
+                        <p class="fav-price">$6.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu3.jpg' %}" alt="Food item">
+                        </div>
+                        <h3>Vegetable Samosa</h3>
+                        <p>Little flaky parcels of pastry filled with tender potatoes, peas, and spices</p>
+                        <p class="fav-price">$5.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu5.webp' %}" alt="Food item">
+                        </div>
+                        <h3>Pani Puri</h3>
+                        <p>Hollow puris made of semolina are cracked and stuffed with a potato-pea filling and refreshing, tangy pani (water). </p>
+                        <p class="fav-price">$7.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu6.jpg' %}" alt="Food item">
+                        </div>
+                        <h3>Chicken 65</h3>
+                        <p>Chicken pieces are marinated and deep fried with flour, spices, yogurt, egg and curry leaves</p>
+                        <p class="fav-price">$13.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu7.jpg' %}" alt="Food item">
+                        </div>
+                        <h3>Chicken Majestic</h3>
+                        <p>Deep-fried chicken strips are tossed in a yogurt-based sauce, making it spicy and tangy </p>
+                        <p class="fav-price">$13.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu8.jpg' %}" alt="Food item">
+                        </div>
+                        <h3>Tandoori Chicken</h3>
+                        <p>Chicken marinated in creamy yogurt sauce, spices and cooked in a clay oven for smoky flavor</p>
+                        <p class="fav-price">$15.49</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu9.webp' %}" alt="Food item">
+                        </div>
+                        <h3>Murgh Malai Kebab</h3>
+                        <p>Boneless chicken breast marinated in a juicy mixture of curd, cream, cashew nuts, and spices before being grilled in the oven </p>
+                        <p class="fav-price">$15.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu10.jpg' %}" alt="Food item">
+                        </div>
+                        <h3>Tawa Fish</h3>
+                        <p>Fish marinated in spices, ginger, garlic, curry leaves, lemon and fried in coconut oil and gets a smoky charred flavor </p>
+                        <p class="fav-price">$14.49</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu11.webp' %}" alt="Food item">
+                        </div>
+                        <h3>Tandoori Shrimp</h3>
+                        <p>Shrimp marinated in creamy yogurt sauce, spices and cooked in a clay oven for smoky flavor</p>
+                        <p class="fav-price">$17.49</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu12.jpg' %}" alt="Food item">
+                        </div>
+                        <h3>Hyderabadi Chicken Dum Biryani</h3>
+                        <p>Made of long grain basmati rice cooked with succulent pieces of chicken in secrecy of traditional Hyderabadi nawabi style cooking</p>
+                        <p class="fav-price">$15.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu13.png' %}" alt="Food item">
+                        </div>
+                        <h3>Goat Dum Biryani</h3>
+                        <p>Made of long grain basmati rice cooked with succulent pieces of Goat in secrecy of traditional Hyderabadi nawabi style cooking</p>
+                        <p class="fav-price">$15.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu14.webp' %}" alt="Food item">
+                        </div>
+                        <h3>Vegetable Biryani</h3>
+                        <p>An aromatic rice dish made with basmati rice, veggies & spices.</p>
+                        <p class="fav-price">$13.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu15.jpg' %}" alt="Food item">
+                        </div>
+                        <h3>Paneer Biryani</h3>
+                        <p>A delicious vegetarian layered dish of paneer, dum cooked with spices, herbs and basmati rice</p>
+                        <p class="fav-price">$14.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="{% static 'AmruthaRestaurant/images/Menu16.jpg' %}" alt="Food item">
+                        </div>
+                        <h3>Tomato Pappu</h3>
+                        <p>A lentil dish cooked with some veggies, curry leaves and spices</p>
+                        <p class="fav-price">$12.99</p>
+                        <button class="red_btn">Add to Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
