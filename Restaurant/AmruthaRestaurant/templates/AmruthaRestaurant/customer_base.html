@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'AmruthaRestaurant/images/amrutha-vilas-logo.webp' %}"
+          type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="{% static 'AmruthaRestaurant/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'AmruthaRestaurant/css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'AmruthaRestaurant/css/form_style.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hotel Amrutha Vilas | Home {% endblock %}</title>
+
+</head>
+
+<body>
+
+<!--Header for laptop (start)-->
+<header>
+    <div class="header">
+        <!--Hidden Header for Mobile/Tablet (start)-->
+        <div class="headerbar">
+            <div class="account">
+                <ul>
+                    <li>
+                        <a href="">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa-solid fa-magnifying-glass searchicon" id="searchicon1"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="search" id="searchinput1">
+                            <input type="search" name="search_item" id="search_item">
+                            <i class="fa-solid fa-magnifying-glass srchicon"></i>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="nav">
+                <ul>
+                    <li>
+                        <a href="{% url 'customerdashboard' %}">Dashboard</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'customermenu' %}">Food Menu</a>
+                    </li>
+                    <li>
+                        <a href="">My Orders</a>
+
+                    </li>
+
+
+                    <li>
+                        <a href="{% url 'logout' %}">Logout</a>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--Hidden Header for Mobile/Tablet (end)-->
+        <div class="logo">
+            <img src="{% static 'AmruthaRestaurant/images/amrutha-vilas-logo.webp' %}" alt="logo">
+
+        </div>
+        <div class="rest_name">HOTEL AMRUTHA VILAS</div>
+        <!--Bar/cross in header for mobile/tablet (start)-->
+        <div class="bar">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-xmark" id="hdcross"></i>
+        </div>
+        <!--Bar/cross in header for mobile/tablet (end)-->
+        <div class="nav">
+            <ul>
+                <li>
+                    <a href="{% url 'customerdashboard' %}">Dashboard</a>
+                </li>
+
+                <li>
+                     <a href="{% url 'customermenu' %}">Food Menu</a>
+                </li>
+                <li>
+                    <a href="">My Orders</a>
+
+                </li>
+
+
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+
+                </li>
+            </ul>
+        </div>
+        <div class="account">
+            <ul>
+                <li>
+                    <a href="">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-magnifying-glass searchicon" id="searchicon2"></i>
+                    </a>
+                </li>
+                <li>
+                    <div class="search" id="searchinput2">
+                        <input type="search" name="search" id="search">
+                        <i class="fa-solid fa-magnifying-glass srchicon"></i>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</header>
+<!--Header for laptop (end)-->
+<main>
+    {% block content %}
+    <!-- Content of other templates will go here -->
+    {% endblock %}
+</main>
+
+<!--Section 6 (end)-->
+</div>
+
+<!--Footer-->
+<div class="footer">
+    <div class="footer-1">
+        <div class="logo">
+            <img src="{% static 'AmruthaRestaurant/images/amrutha-vilas-logo.webp' %}" alt="logo">
+        </div>
+        <p>Address:</p>
+        <div>
+            <address>
+                <p>Hotel Amrutha Vilas<br>420 S Main Street<br>Nashua, New Hampshire</p>
+                <p>Email: hotelamruthavilas99@gmail.com</p>
+            </address>
+        </div>
+    </div>
+    <div class="footer-2">
+        <h2>Powered by</h2>
+        <img src="{% static 'AmruthaRestaurant/images/logo-no-background.png' %}" alt="">
+
+    </div>
+</div>
+<script src="{% static 'AmruthaRestaurant/js/app.js' %}"></script>
+</body>
+
+</html>
