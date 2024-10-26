@@ -1,4 +1,5 @@
 from django import forms
+from .models import MenuItem
 
 class SignUpForm(forms.Form):
     fullname = forms.CharField(
@@ -41,3 +42,17 @@ class SignInForm(forms.Form):
             'id': 'password'
         })
     )
+class MenuItemForm(forms.ModelForm):
+    class Meta:
+        model = MenuItem
+        fields = ['name', 'description', 'price', 'image']
+        labels = {
+            'name': 'Food Name',
+            'description': 'Description',
+            'price': 'Price (in USD)',
+            'image': 'Food Image'
+        }
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'price': forms.NumberInput(attrs={'step': '0.01', 'style': 'width: 350px;'}),
+        }

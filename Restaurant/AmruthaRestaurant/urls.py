@@ -12,4 +12,9 @@ urlpatterns = [
     path('adminsignin/', views.adminsignin, name='adminsignin'),
     path('admindashboard/', views.admindashboard, name='admindashboard'),
     path('customermenu/', views.customermenu, name='customermenu'),
+    path('customer_list/', views.customer_list, name='customer_list'),  # URL for the customer list page
+    path('menu_items/', views.menu_items, name='menu_items'),
+    path('add_item/', views.add_item, name='add_item'),
+
+
 ]

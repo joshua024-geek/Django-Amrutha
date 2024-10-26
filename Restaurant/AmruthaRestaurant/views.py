@@ -3,6 +3,8 @@ from .forms import SignUpForm, SignInForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import make_password, check_password
 from .models import User, Admin
+from .forms import MenuItemForm
+from .models import MenuItem
 from django.contrib.auth.decorators import login_required
 
 
@@ -15,7 +17,8 @@ def about(request):
 
 
 def foodmenu(request):
-    return render(request, 'AmruthaRestaurant/menu.html')
+    menu_items = MenuItem.objects.all()
+    return render(request, 'AmruthaRestaurant/menu.html', {'menu_items': menu_items})
 
 
 def signup(request):
@@ -99,8 +102,12 @@ def logout(request):
     request.session.flush()  # Clear all session data to log out the user
     return redirect('signin')
 
+
 def customermenu(request):
-    return render(request, 'AmruthaRestaurant/customer_menu.html')
+    menu_items = MenuItem.objects.all()
+    return render(request, 'AmruthaRestaurant/customer_menu.html', {'menu_items': menu_items})
+
+
 
 def adminsignin(request):
     if request.method == 'POST':
@@ -153,3 +160,22 @@ def admindashboard(request):
     return render(request, 'AmruthaRestaurant/admin_dashboard.html', context)
 
 
+def customer_list(request):
+    users = User.objects.all()  # Retrieve all users from the database
+    return render(request, 'AmruthaRestaurant/customer_list.html', {'users': users})
+
+
+def add_item(request):
+    if request.method == 'POST':
+        form = MenuItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('menu_items')  # Replace 'menu_items' with the URL name for the menu list view
+    else:
+        form = MenuItemForm()
+    return render(request, 'AmruthaRestaurant/add_menu_item.html', {'form': form})
+
+
+def menu_items(request):
+    menu_items = MenuItem.objects.all()
+    return render(request, 'AmruthaRestaurant/menu_items.html', {'menu_items': menu_items})

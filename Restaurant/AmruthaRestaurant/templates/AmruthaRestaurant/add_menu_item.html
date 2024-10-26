@@ -144,8 +144,8 @@
     <!-- Left Sidebar -->
     <div class="cs-sidebar">
         <ul class="cs-nav">
-            <li class="cs-active"><a href="{% url 'admindashboard' %}">Orders</a></li>
-            <li> <a href="{% url 'menu_items' %}">Menu Items</a></li>
+            <li><a href="{% url 'admindashboard' %}">Orders</a></li>
+            <li class="cs-active"><a href="{% url 'menu_items' %}">Menu Items</a></li>
             <li><a href="{% url 'customer_list' %}">Customers</a></li>
             <li><a href="#">Notifications</a></li>
             <li><a href="#">Profile</a></li>
@@ -155,9 +155,32 @@
 
     <!-- Main Content -->
     <div class="cs-main-content">
-        <h2>Customer Orders</h2>
-        <p>No Orders Yet.</p>
+        <h3 style="text-align:center">Add New Menu Item</h3>
 
+        {% if form.non_field_errors %}
+        <ul class="errorlist">
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.name.label_tag }}<br>
+            {{ form.name }}<br>
+
+            {{ form.description.label_tag }}<br>
+            {{ form.description }}<br>
+
+            {{ form.price.label_tag }}<br>
+            {{ form.price }}<br>
+
+            {{ form.image.label_tag }}<br>
+            {{ form.image }}<br>
+
+            <input type="submit" value="Add Item">
+        </form>
     </div>
 </div>
 {% endblock %}

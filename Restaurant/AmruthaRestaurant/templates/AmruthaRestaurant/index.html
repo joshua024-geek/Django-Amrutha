@@ -12,8 +12,10 @@
             <p>We want you to fall in love with our food. That is why we settle for nothing but fresh, premium quality
                 spices and ingredients. Our friendly atmosphere and affordable prices will keep you coming back again
                 and again...</p>
-            <button class="red_btn" onclick="window.location.href='menu.html';">Order Now <i
-                    class="fa-solid fa-arrow-right-long"></i></button>
+            <button class="red_btn" onclick="window.location.href='{% url 'signin' %}';">
+                Order Now <i class="fa-solid fa-arrow-right-long"></i>
+            </button>
+
         </div>
         <div>
             <img src="{% static 'AmruthaRestaurant/images/main_slide_prev_ui.png' %}" alt="">
@@ -30,7 +32,7 @@
             <h3>Hyderabadi Chicken Biryani</h3>
             <p>Made of long grain basmati rice cooked with succulent pieces of chicken in secrecy of traditional
                 Hyderabadi nawabi style cooking.</p>
-            <button class="white_btn" onclick="window.location.href='menu.html';">See Menu</button>
+            <button class="white_btn" onclick="window.location.href='{% url 'foodmenu' %}';">See Menu</button>
         </div>
         <div class="item">
             <div>
@@ -38,7 +40,7 @@
             </div>
             <h3>Tandoori Chicken</h3>
             <p>Chicken marinated in creamy yogurt sauce, spices and cooked in a clay oven for smoky flavor.</p>
-            <button class="white_btn" onclick="window.location.href='menu.html';">See Menu</button>
+            <button class="white_btn" onclick="window.location.href='{% url 'foodmenu' %}';">See Menu</button>
         </div>
         <div class="item">
             <div>
@@ -46,7 +48,7 @@
             </div>
             <h3>Chili paneer</h3>
             <p>Stir fried panner tossed with onions, bell peppers, garlic chili sauce</p>
-            <button class="white_btn" onclick="window.location.href='menu.html';">See Menu</button>
+            <button class="white_btn" onclick="window.location.href='{% url 'foodmenu' %}';">See Menu</button>
         </div>
     </div>
     <!--Section 2 (end)-->
@@ -104,12 +106,13 @@
         <div class="fav-food">
             <div class="item">
                 <div>
-                    <img src="{% static 'AmruthaRestaurant/images/indian-chicken-tikka-masala-bowl_466689-874_prev_ui.png' %}" alt="Food item">
+                    <img src="{% static 'AmruthaRestaurant/images/indian-chicken-tikka-masala-bowl_466689-874_prev_ui.png' %}"
+                         alt="Food item">
                 </div>
                 <h3>Chicken Tikka Masala</h3>
                 <p>Boneless chicken breast grilled in the tandoor and slow cooked in a creamy tomato sauce</p>
                 <p class="fav-price">$16.99</p>
-                <button class="white_btn" onclick="window.location.href='menu.html';">Order Now</button>
+                <button class="white_btn" onclick="window.location.href='{% url 'signin' %}';">Order Now</button>
             </div>
             <div class="item">
                 <div>
@@ -118,7 +121,7 @@
                 <h3>Goat Curry</h3>
                 <p>Goat cooked in onion, tomato, and the spicy sauce</p>
                 <p class="fav-price">$17.99</p>
-                <button class="white_btn" onclick="window.location.href='menu.html';">Order Now</button>
+                <button class="white_btn" onclick="window.location.href='{% url 'signin' %}';">Order Now</button>
             </div>
             <div class="item">
                 <div>
@@ -128,7 +131,7 @@
                 <p>Healthy, protein & flavor-packed dish of Indian cheese, served in a buttery, spicy & creamy curry
                     made with spinach</p>
                 <p class="fav-price">$14.49</p>
-                <button class="white_btn" onclick="window.location.href='menu.html';">Order Now</button>
+                <button class="white_btn" onclick="window.location.href='{% url 'signin' %}';">Order Now</button>
             </div>
             <div class="item">
                 <div>
@@ -137,7 +140,7 @@
                 <h3>Mysore Masala Dosa</h3>
                 <p>Spiced Crepe smeared inside with spicy chutney and potato masala</p>
                 <p class="fav-price">$11.99</p>
-                <button class="white_btn" onclick="window.location.href='menu.html';">Order Now</button>
+                <button class="white_btn" onclick="window.location.href='{% url 'signin' %}';">Order Now</button>
             </div>
         </div>
         <!-- design div  -->
