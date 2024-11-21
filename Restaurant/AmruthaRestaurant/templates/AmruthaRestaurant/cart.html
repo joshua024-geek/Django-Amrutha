@@ -1,0 +1,107 @@
+{% extends 'AmruthaRestaurant/customer_base.html' %}
+{% load static %}
+
+{% block title %}Your Cart Details{% endblock %}
+
+{% block content %}
+<div class="cart-page" style="margin: 0 auto; max-width: 1000px;">
+    <h2 style="text-align:center">Your Cart</h2>
+
+    {% if cart_items %}
+    <table class="cart-table">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.total_price }}</td>
+            <td>
+                <a href="{% url 'remove_cart_item' item.id %}" class="text-danger" title="Remove item"
+                   onclick="return confirm('Are you sure you want to remove this item?');">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3" class="text-right"><strong>Total:</strong></td>
+            <td><strong>${{ total_price_all_products }}</strong></td>
+        </tr>
+        </tfoot>
+    </table>
+    <div class="checkout-button">
+        <a href="{% url 'checkout' %}" class="back_btn" style="text-align:center"> Proceed to Checkout</a>
+    </div>
+    <div class="checkout-button">
+        <a href="{% url 'customermenu' %}" class="back_btn" style="text-align:center"> Continue Shopping</a>
+    </div>
+    {% else %}
+    <br/>
+    <p style="text-align:center">Your cart is empty. <a href="{% url 'customermenu' %}">Click Here to Continue shopping</a></p>
+    <br/>
+    {% endif %}
+</div>
+
+
+<style>
+    .cart-page {
+     padding: 20px;
+ }
+
+ .cart-table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-bottom: 20px;
+ }
+
+ .cart-table th, .cart-table td {
+     padding: 10px;
+     border: 1px solid #ddd;
+ }
+
+ .checkout-button {
+     text-align: right;
+ }
+   .back_btn {
+         display: inline-block;
+         margin-top: 10px;
+         padding: 8px 15px;
+         background-color: #007bff;
+         color: #fff;
+         font-size: 14px;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         text-decoration: none;
+     }
+
+     .back_btn:hover {
+         background-color: #0056b3;
+     }
+       .red_btn {
+         margin-top: 15px;
+         padding: 10px 20px;
+         background-color: #ff4d4d;
+         color: #fff;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+     }
+
+     .red_btn:hover {
+         background-color: #e04343;
+     }
+</style>
+{% endblock %}

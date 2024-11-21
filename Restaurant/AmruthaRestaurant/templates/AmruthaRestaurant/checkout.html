@@ -1,0 +1,190 @@
+{% extends 'AmruthaRestaurant/customer_base.html' %}
+{% load static %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="checkout-page" style="margin: 0 auto; max-width: 800px; padding: 20px;">
+
+    <!-- Order Summary Section -->
+    <h2 class="section-title">Order Summary</h2>
+    <hr class="section-divider">
+    <table class="summary-table">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.total_price }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2"><strong>Grand Total</strong></td>
+            <td><strong>${{ total_price_all_products }}</strong></td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <!-- Shipping Address Section -->
+    <h2 class="section-title">Billing Details</h2>
+    <hr class="section-divider">
+    <form class="checkout-form" method="POST" action="{% url 'place_order' %}">
+        {% csrf_token %}
+        <h2 class="section-title">Billing Address</h2>
+        <label for="address_line1">Address Line</label>
+        <input type="text" id="address_line1" name="address_line1" required>
+
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" required>
+
+        <label for="state">State</label>
+        <input type="text" id="state" name="state" required>
+
+        <label for="zip_code">ZIP Code</label>
+        <input type="text" id="zip_code" name="zip_code" required>
+
+        <label for="country">Country</label>
+        <input type="text" id="country" name="country" required>
+
+        <!-- Payment Method Section -->
+        <h2 class="section-title">Payment Method</h2>
+        <hr class="section-divider">
+
+        <!-- Credit/Debit Card Option -->
+        <label style="display: block;"><input type="radio" name="payment_method" value="card"
+                                              onclick="togglePaymentFields(this)"> Credit/Debit Card</label>
+        <div class="payment-details" id="card-fields" style="display: none; margin-left: 20px;">
+            <label>Supported Cards: Visa, MasterCard, Amex</label>
+            <input type="text" name="card_number" placeholder="Card Number" style="width: 90%; margin-top: 5px;">
+            <input type="text" name="card_expiry_date" placeholder="Expiration Date (MM/YY)"
+                   style="width: 90%; margin-top: 5px;">
+            <input type="text" name="card_cvv" placeholder="CVV" style="width: 90%; margin-top: 5px;">
+        </div>
+
+        <!-- PayPal Option -->
+        <label style="display: block; margin-top: 5px;"><input type="radio" name="payment_method" value="paypal"
+                                                               onclick="togglePaymentFields(this)"> PayPal</label>
+        <div class="payment-details" id="paypal-fields" style="display: none; margin-left: 20px;">
+            <input type="email" name="paypal_email" placeholder="PayPal Email" style="width: 90%; margin-top: 5px;">
+        </div>
+
+        <!-- Digital Wallet Option -->
+        <label style="display: block; margin-top: 5px;"><input type="radio" name="payment_method" value="digital_wallet"
+                                                               onclick="togglePaymentFields(this)"> Digital
+            Wallets</label>
+        <div class="payment-details" id="digital_wallet-fields" style="display: none; margin-left: 20px;">
+            <label>Select Wallet Type:</label>
+            <select name="digital_wallet_type" style="width: 90%; margin-top: 5px;">
+                <option value="">Select Wallet</option>
+                <option value="apple_pay">Apple Pay</option>
+                <option value="google_pay">Google Pay</option>
+                <option value="samsung_pay">Samsung Pay</option>
+            </select>
+        </div>
+
+        <!-- Special Instructions Section -->
+        <h2 class="section-title">Special Instructions</h2>
+        <hr class="section-divider">
+        <textarea name="special_instructions" placeholder="Any special instructions for your order"
+                  style="width: 100%; height: 100px;"></textarea>
+
+        <div class="checkout-button">
+            <button type="submit" class="checkout-btn">Complete Payment</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    .checkout-page {
+        font-size: 14px;
+    }
+
+    .section-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .section-divider {
+        border: none;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 15px;
+    }
+
+    .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .summary-table th, .summary-table td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    .checkout-form label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+    }
+
+    .checkout-form input,
+    .checkout-form select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .checkout-button {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .checkout-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .checkout-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<!-- JavaScript to toggle payment fields -->
+<script>
+    function togglePaymentFields(selectedRadio) {
+        const paymentOptions = document.querySelectorAll('.payment-details');
+        paymentOptions.forEach(option => option.style.display = 'none');
+
+        const selectedOptionId = selectedRadio.value + '-fields';
+        const selectedField = document.getElementById(selectedOptionId);
+        if (selectedField) {
+            selectedField.style.display = 'block';
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const selectedRadio = document.querySelector('input[name="payment_method"]:checked');
+        if (selectedRadio) togglePaymentFields(selectedRadio);
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends 'AmruthaRestaurant/admin_base.html' %}
+{% load static %}
+
+{% block title %}Admin Order Details{% endblock %}
+
+{% block content %}
+<div class="order-details-page" style="margin: 0 auto; max-width: 800px; padding: 20px;">
+
+    <!-- Order Summary Section -->
+    <h2 class="section-title">Order Summary</h2>
+    <hr class="section-divider">
+    <table class="summary-table">
+        <thead>
+            <tr>
+                <th>Order Number</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ order.order_number }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.created_at|date:"d M Y H:i" }}</td>
+                <td>${{ order.total_price }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Ordered Items Section -->
+    <h2 class="section-title">Ordered Items</h2>
+    <hr class="section-divider">
+    <table class="summary-table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+             {% for item in order.cart_items.all %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.description|default:"No description" }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.total_price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Address Section -->
+    <h2 class="section-title">Delivery Address</h2>
+    <hr class="section-divider">
+    <p>{{ order.address_line1 }}</p>
+    <p>{{ order.city }}</p>
+    <p>{{ order.state }}</p>
+    <p>{{ order.zip_code }}</p>
+    <p>{{ order.country }}</p>
+
+    <!-- Payment Method Section -->
+    <h2 class="section-title">Payment Method</h2>
+    <hr class="section-divider">
+    <p>{{ order.payment_method }}</p>
+
+    <!-- Special Instructions Section -->
+    <h2 class="section-title">Special Instructions</h2>
+    <hr class="section-divider">
+    <p>{{ order.special_instructions|default:"None" }}</p>
+
+    <div class="back-button">
+    <a href="{% url 'mark_order_processing' order.order_number %}" class="back-btn"
+       onclick="return confirm('Are you sure you want to mark this order as Processing?');" style="margin-right:10px">
+        Mark As Processing
+    </a>
+    <a href="{% url 'mark_order_delivered' order.order_number %}" class="back-btn"
+       onclick="return confirm('Are you sure you want to mark this order as Delivered?');">
+        Mark As Delivered
+    </a>
+</div>
+     <br/>
+    <div class="back-button">
+        <a href="{% url 'admindashboard' %}" class="back-btn">Back to Dashboard</a>
+    </div>
+</div>
+
+<style>
+    .order-details-page {
+        font-size: 14px;
+    }
+
+    .section-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .section-divider {
+        border: none;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 15px;
+    }
+
+    .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .summary-table th, .summary-table td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    .back-button {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .back-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+    .back-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}

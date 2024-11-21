@@ -1,0 +1,37 @@
+{% extends 'AmruthaRestaurant/admin_base.html' %}
+{% load static %}
+
+{% block title %}Edit Menu Item{% endblock %}
+{% block content %}
+
+<div class="cs-main-content">
+    <h3 style="text-align:center">Edit Menu Item</h3>
+
+    {% if form.non_field_errors %}
+    <ul class="errorlist">
+        {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.name.label_tag }}<br>
+        {{ form.name }}<br>
+
+        {{ form.description.label_tag }}<br>
+        {{ form.description }}<br>
+
+        {{ form.price.label_tag }}<br>
+        {{ form.price }}<br>
+
+        {{ form.image.label_tag }}<br>
+        {{ form.image }}<br>
+
+        <input type="submit" value="Save Changes">
+    </form>
+</div>
+
+
+{% endblock %}

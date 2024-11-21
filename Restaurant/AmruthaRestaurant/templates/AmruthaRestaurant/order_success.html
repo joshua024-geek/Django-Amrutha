@@ -1,0 +1,26 @@
+<!-- order_success.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Placed</title>
+</head>
+<body>
+    {% if messages %}
+        <script>
+            // Collect all messages and display them using an alert
+            let messageText = "{% for message in messages %}{{ message }}{% endfor %}";
+            if (messageText) {
+                alert(messageText);  // Display the success message
+                // Use setTimeout to delay the redirection
+                setTimeout(function() {
+                    window.location.href = "{% url 'customerdashboard' %}";
+                }, 1000);  // Redirect after 1 second
+            }
+        </script>
+    {% endif %}
+    <!-- In case JavaScript is disabled, provide a fallback message -->
+    <noscript>
+        <p>You have placed your order successfully. Please click <a href="{% url 'customerdashboard' %}">here</a> to continue.</p>
+    </noscript>
+</body>
+</html>
