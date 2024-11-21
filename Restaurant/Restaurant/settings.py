@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'django-insecure-!+ea)7c&6f@3kf_a-$ert#oooso1yrxzr^ncqhv2#c4kyrps&2
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -63,13 +61,16 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Added This new line - add to AWS if does not exist
+                'AmruthaRestaurant.context_processors.cart_item_count',  # Add this line as well
+                'AmruthaRestaurant.context_processors.admin_notifications_count',
+                'AmruthaRestaurant.context_processors.customer_notifications_count',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'Restaurant.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -81,10 +82,9 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',  # or your MySQL server IP
-        'PORT': '3306',       # Default MySQL port
+        'PORT': '3306',  # Default MySQL port
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -104,7 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -116,7 +115,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
@@ -125,7 +123,6 @@ STATICFILES_DIRS = [BASE_DIR / 'AmruthaRestaurant/static']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'AmruthaRestaurant/static/AmruthaRestaurant/'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

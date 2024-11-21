@@ -147,9 +147,11 @@
             <li><a href="{% url 'admindashboard' %}">Orders</a></li>
             <li class="cs-active"><a href="{% url 'menu_items' %}">Menu Items</a></li>
             <li><a href="{% url 'customer_list' %}">Customers</a></li>
-            <li><a href="#">Notifications</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="#">Notifications {% if unread_admin_count > 0 %}
+                <span class="badge">{{ unread_admin_count }}</span>
+                {% endif %}</a></li>
+            <li><a href="{% url 'admin_profile' %}">Profile</a></li>
+            <li><a href="{% url 'adminlogout' %}">Logout</a></li>
         </ul>
     </div>
 

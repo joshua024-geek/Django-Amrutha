@@ -4,6 +4,15 @@
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block content %}
+{% if messages %}
+<script>
+    let messageText = "{% for message in messages %}{{ message }}{% endfor %}";
+    alert(messageText);  // Display the success message
+    setTimeout(function() {
+        window.location.href = "{% url 'menu_items' %}";
+    }, 2000);  // Redirect after 2 seconds
+</script>
+{% endif %}
 <style>
     /* Customer Dashboard */
 .cs-dashboard {
@@ -153,70 +162,82 @@ th {
 }
 
 </style>
+{% if request.session.edit_success %}
+<script>
+    alert("{{ request.session.edit_success }}");
+</script>
+{% endif %}
+
 <div class="cs-dashboard">
     <!-- Left Sidebar -->
     <div class="cs-sidebar">
         <ul class="cs-nav">
             <li><a href="{% url 'admindashboard' %}">Orders</a></li>
-            <li class="cs-active"> <a href="{% url 'menu_items' %}">Menu Items</a></li>
+            <li class="cs-active"><a href="{% url 'menu_items' %}">Menu Items</a></li>
             <li><a href="{% url 'customer_list' %}">Customers</a></li>
-            <li><a href="#">Notifications</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a href="{% url 'admin_notifications' %}">Notifications {% if unread_admin_count > 0 %}
+                <span class="badge">{{ unread_admin_count }}</span>
+                {% endif %}</a></li>
+            <li><a href="{% url 'admin_profile' %}">Profile</a></li>
             <li><a href="#">Logout</a></li>
         </ul>
     </div>
 
-   <div class="cs-main-content">
-    <h2 style="text-align:center">Menu Items</h2>
+    <div class="cs-main-content">
+        <h2 style="text-align:center">Menu Items</h2>
 
-    <!-- Add Item Button -->
-    <div style="text-align: center; margin-bottom: 20px;">
-        <a href="{% url 'add_item' %}" class="btn btn-primary" style="padding: 10px 20px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">
-            Add Item
-        </a>
-    </div>
+        <!-- Add Item Button -->
+        <div style="text-align: center; margin-bottom: 20px;">
+            <a href="{% url 'add_item' %}" class="btn btn-primary"
+               style="padding: 10px 20px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">
+                Add Item
+            </a>
+        </div>
 
-    {% if menu_items %}
+        {% if menu_items %}
         <table style="width:100%; border-collapse: collapse;">
             <thead>
-                <tr>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Image</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Name</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Description</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Price</th>
-                    <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Actions</th>
-                </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Image</th>
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Name</th>
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Description</th>
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Price</th>
+                <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Actions</th>
+            </tr>
             </thead>
             <tbody>
-                {% for item in menu_items %}
-                    <tr>
-                        <td style="padding: 10px; text-align: center; border: 1px solid #ddd;">
-                            {% if item.image %}
-                                <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 100px; height: auto;">
-                            {% else %}
-                                No Image
-                            {% endif %}
-                        </td>
-                        <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ item.name }}</td>
-                        <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ item.description }}</td>
-                        <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">${{ item.price }}</td>
-                        <td style="padding: 10px; text-align: center; border: 1px solid #ddd;">
-                            <!-- Edit and Delete Icons with Placeholder Links -->
-                            <a href="#" title="Edit" style="margin-right: 10px;">
-                                <i class="fas fa-edit" style="color: #007bff; font-size: 18px;"></i>
-                            </a>
-                            <a href="#" title="Delete">
-                                <i class="fas fa-trash-alt" style="color: #dc3545; font-size: 18px;"></i>
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
+            {% for item in menu_items %}
+            <tr>
+                <td style="padding: 10px; text-align: center; border: 1px solid #ddd;">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 100px; height: auto;">
+                    {% else %}
+                    No Image
+                    {% endif %}
+                </td>
+                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ item.name }}</td>
+                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ item.description }}</td>
+                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">${{ item.price }}</td>
+                <td style="padding: 10px; text-align: center; border: 1px solid #ddd;">
+                    <!-- Edit and Delete Icons with Placeholder Links -->
+                    <a href="{% url 'edit_item' item.id %}" title="Edit" style="margin-right: 10px;">
+                        <i class="fas fa-edit" style="color: #007bff; font-size: 18px;"></i>
+                    </a>
+                    <a href="{% url 'delete_item' item.id %}" title="Delete"
+                       onclick="return confirm('Are you sure you want to delete {{ item.name }}?');">
+                        <i class="fas fa-trash-alt" style="color: #dc3545; font-size: 18px;"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
             </tbody>
         </table>
-    {% else %}
+        {% else %}
         <p>No Menu Items Available.</p>
-    {% endif %}
-</div>
+        {% endif %}
+
+    </div>
+
 
 </div>
 {% endblock %}

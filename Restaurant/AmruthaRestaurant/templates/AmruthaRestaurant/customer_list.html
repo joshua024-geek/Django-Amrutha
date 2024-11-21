@@ -158,54 +158,61 @@ th {
     <div class="cs-sidebar">
         <ul class="cs-nav">
             <li><a href="{% url 'admindashboard' %}">Orders</a></li>
-            <li> <a href="{% url 'menu_items' %}">Menu Items</a></li>
+            <li><a href="{% url 'menu_items' %}">Menu Items</a></li>
             <li class="cs-active"><a href="#">Customers</a></li>
-            <li><a href="#">Notifications</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a href="{% url 'admin_notifications' %}">Notifications{% if unread_admin_count > 0 %}
+                <span class="badge">{{ unread_admin_count }}</span>
+                {% endif %}</a></li>
+            <li><a href="{% url 'admin_profile' %}">Profile</a></li>
             <li><a href="#">Logout</a></li>
         </ul>
     </div>
 
-     <!-- Main Content -->
+    <!-- Main Content -->
     <div class="cs-main-content">
-    <h2 style="text-align:center">Customer List</h2>
+        <h2 style="text-align:center">Customer List</h2>
 
-    {% if users %}
+        {% if users %}
         <!-- Display the table if there are users -->
         <table style="width:100%; border-collapse: collapse;">
             <thead>
-                <tr>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Full Name</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Email</th>
-                    <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Actions</th>
-                </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Full Name</th>
+                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Email</th>
+                <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Actions</th>
+            </tr>
             </thead>
             <tbody>
-                {% for user in users %}
-                    <tr>
-                        <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ user.fullname }}</td>
-                        <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ user.email }}</td>
-                        <td style="padding: 10px; text-align: center; border: 1px solid #ddd;">
-                            <!-- Action buttons with Font Awesome icons -->
-                            <button title="Edit" style="border: none; background: none; cursor: pointer; padding: 5px;">
-                                <i class="fas fa-edit" style="color: #007bff; font-size: 18px;"></i>
-                            </button>
-                            <button title="Delete" style="border: none; background: none; cursor: pointer; padding: 5px;">
-                                <i class="fas fa-trash-alt" style="color: #dc3545; font-size: 18px;"></i>
-                            </button>
-                            <button title="Block" style="border: none; background: none; cursor: pointer; padding: 5px;">
-                                <i class="fas fa-ban" style="color: #ffc107; font-size: 18px;"></i>
-                            </button>
-                        </td>
-                    </tr>
-                {% endfor %}
+            {% for user in users %}
+            <tr>
+                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ user.fullname }}</td>
+                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ user.email }}</td>
+                <td style="padding: 10px; text-align: center; border: 1px solid #ddd;">
+                    <!-- Action buttons with Font Awesome icons -->
+                    {% if user.is_blocked %}
+                    <button title="Unblock" style="border: none; background: none; cursor: pointer; padding: 5px;">
+                        <a href="{% url 'unblock_user' user.id %}">
+                            <i class="fas fa-unlock" style="color: #28a745; font-size: 18px;"></i>
+                        </a>
+                    </button>
+                    {% else %}
+                    <button title="Block" style="border: none; background: none; cursor: pointer; padding: 5px;">
+                        <a href="{% url 'block_user' user.id %}">
+                            <i class="fas fa-ban" style="color: #ffc107; font-size: 18px;"></i>
+                        </a>
+                    </button>
+                    {% endif %}
+
+                </td>
+            </tr>
+            {% endfor %}
             </tbody>
         </table>
-    {% else %}
+        {% else %}
         <!-- Display message if no users are found -->
         <p>No Customers Yet.</p>
-    {% endif %}
-</div>
+        {% endif %}
+    </div>
 
 </div>
 </div>

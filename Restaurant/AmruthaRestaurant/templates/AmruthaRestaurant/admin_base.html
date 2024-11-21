@@ -18,6 +18,7 @@
 
 </head>
 
+
 <body>
 
 <!--Header for laptop (start)-->
@@ -49,13 +50,13 @@
                     </li>
 
                     <li>
-                        <a href="">Profile</a>
+                        <a href="{% url 'admin_profile' %}">Profile</a>
 
                     </li>
 
 
                     <li>
-                        <a href="{% url 'logout' %}">Logout</a>
+                        <a href="{% url 'adminlogout' %}">Logout</a>
 
                     </li>
                 </ul>
@@ -81,13 +82,13 @@
 
 
                 <li>
-                    <a href="">Profile</a>
+                    <a href="{% url 'admin_profile' %}">Profile</a>
 
                 </li>
 
 
                 <li>
-                    <a href="{% url 'logout' %}">Logout</a>
+                    <a href="{% url 'adminlogout' %}">Logout</a>
 
                 </li>
             </ul>
@@ -119,29 +120,23 @@
 </main>
 
 <!--Section 6 (end)-->
-</div>
 
-<!--Footer-->
-<div class="footer">
-    <div class="footer-1">
-        <div class="logo">
-            <img src="{% static 'AmruthaRestaurant/images/amrutha-vilas-logo.webp' %}" alt="logo">
-        </div>
-        <p>Address:</p>
-        <div>
-            <address>
-                <p>Hotel Amrutha Vilas<br>420 S Main Street<br>Nashua, New Hampshire</p>
-                <p>Email: hotelamruthavilas99@gmail.com</p>
-            </address>
-        </div>
-    </div>
-    <div class="footer-2">
-        <h2>Powered by</h2>
-        <img src="{% static 'AmruthaRestaurant/images/logo-no-background.png' %}" alt="">
 
-    </div>
-</div>
+
 <script src="{% static 'AmruthaRestaurant/js/app.js' %}"></script>
 </body>
+<style>
+    .badge {
 
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8em;
+    vertical-align: top;
+
+}
+
+
+</style>
 </html>>

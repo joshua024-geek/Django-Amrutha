@@ -16,7 +16,7 @@
     {% if form.non_field_errors %}
         <ul class="errorlist">
             {% for error in form.non_field_errors %}
-                <li>{{ error }}</li>
+                <li style="color:red; text-align:center">{{ error }}</li>
             {% endfor %}
         </ul>
     {% endif %}

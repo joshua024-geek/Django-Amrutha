@@ -22,7 +22,7 @@
                     <h3>{{ item.name }}</h3>
                     <p>{{item.description }} </p>
                     <p class="fav-price">{{item.price }} </p>
-                    <a href=""><button class="red_btn">Add to Cart</button> </a>
+                    <a href="{% url 'product_detail' item.id %}"><button class="red_btn">Order</button> </a>
                 </div>
 
  {% endfor %}
